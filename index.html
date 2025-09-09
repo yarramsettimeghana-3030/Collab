@@ -2,116 +2,205 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Art Supplies Dashboard</title>
+  <title>🎨 Art Supplies Dashboard</title>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+    * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
-      font-family: Arial, sans-serif;
-      margin: 0; padding: 0;
-      background: #f5f5f5;
+      font-family: 'Poppins', sans-serif;
+      background: #f0f2f5;
+      color: #333;
+      display: flex;
+      min-height: 100vh;
+    }
+    /* Sidebar */
+    .sidebar {
+      width: 250px;
+      background: linear-gradient(180deg, #111, #444);
+      color: white;
+      display: flex;
+      flex-direction: column;
+      padding: 1.5rem;
+    }
+    .sidebar h2 {
+      margin-bottom: 2rem;
+      text-align: center;
+      font-weight: 600;
+    }
+    .sidebar a {
+      color: white;
+      text-decoration: none;
+      display: block;
+      padding: 0.8rem;
+      margin: 0.3rem 0;
+      border-radius: 8px;
+      transition: background 0.3s;
+    }
+    .sidebar a:hover {
+      background: #ff7f50;
+    }
+    /* Main content */
+    .main {
+      flex: 1;
+      padding: 2rem;
+      overflow-y: auto;
     }
     header {
-      background: #333; color: white;
-      padding: 1rem; text-align: center;
+      background: #ff7f50;
+      color: white;
+      padding: 1rem 2rem;
+      border-radius: 12px;
+      margin-bottom: 2rem;
     }
-    nav {
-      display: flex; justify-content: center;
-      background: #444;
+    header h1 {
+      font-size: 1.8rem;
     }
-    nav a {
-      color: white; padding: 1rem;
-      text-decoration: none;
+    /* Search */
+    #searchBar {
+      width: 100%;
+      padding: 0.8rem;
+      margin: 1rem 0 2rem;
+      border: 2px solid #ccc;
+      border-radius: 8px;
+      font-size: 1rem;
     }
-    nav a:hover {
-      background: #666;
-    }
-    .container {
-      padding: 2rem;
+    /* Product grid */
+    .grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
       gap: 1.5rem;
     }
     .card {
       background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
       padding: 1rem;
-      border-radius: 10px;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
       text-align: center;
+      transition: transform 0.3s;
+    }
+    .card:hover {
+      transform: translateY(-5px);
     }
     .card img {
-      width: 100%; height: 150px; object-fit: cover;
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
       border-radius: 10px;
     }
+    .card h3 {
+      margin: 1rem 0 0.5rem;
+      font-size: 1.2rem;
+    }
+    .card p {
+      margin-bottom: 0.5rem;
+    }
     .card button {
-      margin-top: 10px;
-      padding: 0.5rem 1rem;
-      background: #28a745;
-      border: none; color: white;
-      border-radius: 5px;
+      background: #ff7f50;
+      border: none;
+      padding: 0.6rem 1.2rem;
+      border-radius: 8px;
+      color: white;
       cursor: pointer;
+      font-size: 0.9rem;
+      transition: background 0.3s;
     }
     .card button:hover {
-      background: #218838;
+      background: #e5673f;
     }
+    /* Cart */
     #cart {
+      margin-top: 2rem;
+      background: #fffbea;
       padding: 1.5rem;
-      background: #fff3cd;
-      border-top: 3px solid #ffcc00;
+      border-radius: 12px;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.1);
     }
-    #searchBar {
-      margin: 1rem auto;
-      display: block;
-      padding: 0.5rem;
-      width: 80%;
-      border: 1px solid #ccc;
-      border-radius: 5px;
+    #cart h2 {
+      margin-bottom: 1rem;
+    }
+    #cart ul {
+      list-style: none;
+      margin-bottom: 1rem;
+    }
+    #cart ul li {
+      margin: 0.4rem 0;
     }
   </style>
 </head>
 <body>
-  <header>
-    <h1>🎨 Art Supplies Shop</h1>
-    <p>Discover and shop your favorite art materials</p>
-  </header>
-  <nav>
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <h2>Art Dashboard</h2>
     <a href="#">Home</a>
     <a href="#">Collections</a>
+    <a href="#">Special Materials</a>
     <a href="#">About</a>
     <a href="#">Contact</a>
-  </nav>
-
-  <input type="text" id="searchBar" placeholder="Search for art supplies...">
-
-  <div class="container" id="productList">
-    <div class="card" data-name="Acrylic Paint Set">
-      <img src="https://picsum.photos/300/200?random=1" alt="Acrylic Paint Set">
-      <h3>Acrylic Paint Set</h3>
-      <p>Price: $25</p>
-      <button onclick="addToCart('Acrylic Paint Set', 25)">Add to Cart</button>
-    </div>
-    <div class="card" data-name="Brush Collection">
-      <img src="https://picsum.photos/300/200?random=2" alt="Brush Collection">
-      <h3>Brush Collection</h3>
-      <p>Price: $15</p>
-      <button onclick="addToCart('Brush Collection', 15)">Add to Cart</button>
-    </div>
-    <div class="card" data-name="Sketchbook">
-      <img src="https://picsum.photos/300/200?random=3" alt="Sketchbook">
-      <h3>Sketchbook</h3>
-      <p>Price: $10</p>
-      <button onclick="addToCart('Sketchbook', 10)">Add to Cart</button>
-    </div>
-    <div class="card" data-name="Watercolor Set">
-      <img src="https://picsum.photos/300/200?random=4" alt="Watercolor Set">
-      <h3>Watercolor Set</h3>
-      <p>Price: $20</p>
-      <button onclick="addToCart('Watercolor Set', 20)">Add to Cart</button>
-    </div>
   </div>
 
-  <div id="cart">
-    <h2>🛒 Shopping Cart</h2>
-    <ul id="cartItems"></ul>
-    <p><strong>Total:</strong> $<span id="totalPrice">0</span></p>
+  <!-- Main content -->
+  <div class="main">
+    <header>
+      <h1>🎨 Art Supplies Shop Dashboard</h1>
+      <p>Explore collections, shop special materials, and fuel your creativity</p>
+    </header>
+
+    <input type="text" id="searchBar" placeholder="🔍 Search for art supplies...">
+
+    <div class="grid" id="productList">
+      <!-- Paints -->
+      <div class="card" data-name="Acrylic Paint Set">
+        <img src="https://picsum.photos/300/200?random=11" alt="Acrylic Paint">
+        <h3>Acrylic Paint Set</h3>
+        <p>$25</p>
+        <button onclick="addToCart('Acrylic Paint Set', 25)">Add to Cart</button>
+      </div>
+      <div class="card" data-name="Watercolor Set">
+        <img src="https://picsum.photos/300/200?random=12" alt="Watercolor">
+        <h3>Watercolor Set</h3>
+        <p>$20</p>
+        <button onclick="addToCart('Watercolor Set', 20)">Add to Cart</button>
+      </div>
+      <div class="card" data-name="Oil Paint Kit">
+        <img src="https://picsum.photos/300/200?random=13" alt="Oil Paint">
+        <h3>Oil Paint Kit</h3>
+        <p>$30</p>
+        <button onclick="addToCart('Oil Paint Kit', 30)">Add to Cart</button>
+      </div>
+      <!-- Brushes -->
+      <div class="card" data-name="Brush Collection">
+        <img src="https://picsum.photos/300/200?random=14" alt="Brushes">
+        <h3>Brush Collection</h3>
+        <p>$15</p>
+        <button onclick="addToCart('Brush Collection', 15)">Add to Cart</button>
+      </div>
+      <!-- Special Materials -->
+      <div class="card" data-name="Charcoal Sticks">
+        <img src="https://picsum.photos/300/200?random=15" alt="Charcoal">
+        <h3>Charcoal Sticks</h3>
+        <p>$12</p>
+        <button onclick="addToCart('Charcoal Sticks', 12)">Add to Cart</button>
+      </div>
+      <div class="card" data-name="Sketchbook">
+        <img src="https://picsum.photos/300/200?random=16" alt="Sketchbook">
+        <h3>Sketchbook</h3>
+        <p>$10</p>
+        <button onclick="addToCart('Sketchbook', 10)">Add to Cart</button>
+      </div>
+      <div class="card" data-name="Canvas Boards">
+        <img src="https://picsum.photos/300/200?random=17" alt="Canvas Boards">
+        <h3>Canvas Boards</h3>
+        <p>$18</p>
+        <button onclick="addToCart('Canvas Boards', 18)">Add to Cart</button>
+      </div>
+    </div>
+
+    <!-- Cart -->
+    <div id="cart">
+      <h2>🛒 Shopping Cart</h2>
+      <ul id="cartItems"></ul>
+      <p><strong>Total:</strong> $<span id="totalPrice">0</span></p>
+    </div>
   </div>
 
   <script>
@@ -127,7 +216,7 @@
     function renderCart() {
       const cartList = document.getElementById('cartItems');
       cartList.innerHTML = "";
-      cart.forEach((c, index) => {
+      cart.forEach(c => {
         let li = document.createElement('li');
         li.textContent = `${c.item} - $${c.price}`;
         cartList.appendChild(li);
@@ -135,7 +224,7 @@
       document.getElementById('totalPrice').textContent = total;
     }
 
-    // Search Functionality
+    // Search Filter
     document.getElementById('searchBar').addEventListener('keyup', function() {
       let query = this.value.toLowerCase();
       let products = document.querySelectorAll('.card');
